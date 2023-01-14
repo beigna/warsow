@@ -7,8 +7,7 @@ ENV USER warsow
 ENV WARSOW_RELEASE warsow-2.1.2
 ENV HOME /opt/$WARSOW_RELEASE
 
-ADD https://warsow.net/$WARSOW_RELEASE.tar.gz /opt
-RUN cd /opt && tar xzvf $WARSOW_RELEASE.tar.gz
+ADD ./$WARSOW_RELEASE.tar.gz /opt
 
 COPY run.sh $HOME
 RUN groupadd -g $GID $USER && \
