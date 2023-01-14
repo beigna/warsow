@@ -1,0 +1,11 @@
+version: "3"
+services:
+  warsow:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "44400:44400"
+      - "44444:44444"
+    env_file:
+      - settings.env
+    network_mode: host
