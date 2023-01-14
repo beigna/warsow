@@ -6,6 +6,4 @@ services:
     ports:
       - "44400:44400"
       - "44444:44444"
-    env_file:
-      - settings.env
     network_mode: host

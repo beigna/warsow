@@ -11,6 +11,8 @@ ADD https://warsow.net/$WARSOW_RELEASE.tar.gz /opt
 RUN cd /opt && tar xzvf $WARSOW_RELEASE.tar.gz
 
 COPY run.sh $HOME
+COPY cfg/dedicated_autoexec.cfg $HOME/basewsw/dedicated_autoexec.cfg
+
 RUN groupadd -g $GID $USER && \
     useradd -u $UID -g $USER -s /bin/bash $USER && \
     chmod +x $HOME/run.sh && \
@@ -18,4 +20,7 @@ RUN groupadd -g $GID $USER && \
 
 USER $USER
 WORKDIR $HOME
+EXPOSE 44400
+EXPOSE 44444
+
 CMD ["/bin/bash", "run.sh"]
