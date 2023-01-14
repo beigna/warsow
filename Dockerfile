@@ -1,12 +1,21 @@
 FROM debian:11-slim
 
-ADD ./warsow-2.1.2.tar.gz /opt
-COPY run.sh /opt/warsow-2.1.2
-RUN groupadd warsow && \
-    useradd -g warsow warsow && \
-    chmod 777 /opt/warsow-2.1.2/run.sh && \
-    chown warsow:warsow -R /opt/warsow-2.1.2
+ARG GID=1000
+ARG UID=1000
 
-# USER warsow
-WORKDIR /opt/warsow-2.1.2
+ENV USER warsow
+ENV WARSOW_RELEASE warsow-2.1.2
+ENV HOME /opt/$WARSOW_RELEASE
+
+ADD https://warsow.net/$WARSOW_RELEASE.tar.gz /opt
+RUN cd /opt && tar xzvf $WARSOW_RELEASE.tar.gz
+
+COPY run.sh $HOME
+RUN groupadd -g $GID $USER && \
+    useradd -u $UID -g $USER -s /bin/bash $USER && \
+    chmod +x $HOME/run.sh && \
+    chown $USER:$USER -R $HOME
+
+USER $USER
+WORKDIR $HOME
 CMD ["/bin/bash", "run.sh"]
