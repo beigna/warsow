@@ -8,4 +8,4 @@ services:
       - "44444:44444"
     network_mode: host
     volumes:
-      - ${PWD}/dedicated_autoexec.cfg:/opt/warsow-2.1.2/basewsw/dedicated_autoexec.cfg
+      - ./dedicated_autoexec.cfg:/opt/warsow-2.1.2/basewsw/dedicated_autoexec.cfg
