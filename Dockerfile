@@ -9,12 +9,10 @@ ENV HOME /opt/$WARSOW_RELEASE
 
 ADD ./$WARSOW_RELEASE.tar.gz /opt
 
-COPY run.sh $HOME
 RUN groupadd -g $GID $USER && \
     useradd -u $UID -g $USER -s /bin/bash $USER && \
-    chmod +x $HOME/run.sh && \
     chown $USER:$USER -R $HOME
 
 USER $USER
 WORKDIR $HOME
-CMD ["/bin/bash", "run.sh"]
+CMD ["./wsw_server"]

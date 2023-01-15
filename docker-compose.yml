@@ -6,6 +6,6 @@ services:
     ports:
       - "44400:44400"
       - "44444:44444"
-    env_file:
-      - settings.env
     network_mode: host
+    volumes:
+      - ${PWD}/dedicated_autoexec.cfg:/opt/warsow-2.1.2/basewsw/dedicated_autoexec.cfg
